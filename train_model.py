@@ -6,12 +6,12 @@ from sklearn.metrics import accuracy_score, classification_report
 import joblib
  
 # Step 1: Load dataset
-df = pd.read_csv("sprint_data_sample_300_with_ids.csv.crdownload")
+df = pd.read_csv("realistic_sprint_data_sample_450.csv.crdownload")
  
 # Step 2: Clean column names (remove spaces)
 df.columns = df.columns.str.strip()
  
-print("columns in my csv:", df.columns.tolist())
+# print("columns in my csv:", df.columns.tolist())
  
 # Step 2.1: Create Delay Category based on incomplete points
 df['Incomplete Points'] = df['Planned Story Points'] - df['Completed Story Points']
@@ -58,7 +58,7 @@ y = df_encoded[target]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
  
 # Step 6: Train the model
-model = RandomForestClassifier(random_state=42)
+model = RandomForestClassifier(n_estimators=200, max_depth=10, random_state=42)
 model.fit(X_train, y_train)
  
 # Step 7: Evaluate the model
